@@ -11,8 +11,10 @@ for i in range(9):
     data_loader = DataLoader('origin_data.txt')
     metaData.append(data_loader.getMetaData()[i * 1500:(i + 1) * 1500, 2:12])
 
+
 # pca 主成分分析,0.95保存率下需要8维,降维为3维用于数据展示
 pca = PCA(n_components=3)
+
 # 降维结果集
 data_reduction = []
 for i in range(9):

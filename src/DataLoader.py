@@ -1,7 +1,8 @@
-# 数据加载模块
+# 数据加载模块，包含数据预处理函数
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
+from sklearn.impute import SimpleImputer
+from sklearn.feature_selection import VarianceThreshold
 
 
 class DataLoader(object):
@@ -21,9 +22,20 @@ class DataLoader(object):
         self.df = pd.DataFrame(data, columns=columnList)
         self.metadata = data
 
+        self.preHandle()
+
+    # 数据预处理
+    def preHandle(self):
+        # 缺省填补采用中位数填补策略
+        imp_median = SimpleImputer(strategy='median')
+        self.metadata = imp_median.fit_transform(self.metadata)
+
+        # 方差过滤
+        selector = VarianceThreshold()
+        self.metadata = selector.fit_transform(self.metadata)
+
     def getData(self):
         return self.df
 
     def getMetaData(self):
         return self.metadata
-
