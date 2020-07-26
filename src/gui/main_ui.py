@@ -16,9 +16,10 @@ from gui.dialog_ui import Ui_Dialog
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+    def setupUi(self, MainWindow,BGMs):
         MainWindow.setObjectName("抖音BGM推荐系统")
         MainWindow.resize(444, 406)
+        self.BGM = BGMs
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
@@ -65,7 +66,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "抖音BGM推荐系统"))
         self.comboBox.setItemText(0, _translate("MainWindow", "化妆品"))
         self.comboBox.setItemText(1, _translate("MainWindow", "日用品"))
         self.comboBox.setItemText(2, _translate("MainWindow", "食品"))
@@ -82,9 +83,10 @@ class Ui_MainWindow(object):
         # 窗口初始属性
         child = QDialog()
         child_ui = Ui_Dialog()
-        child_ui.setupUi(child, self.comboBox.currentIndex())
+        child_ui.setupUi(child, self.comboBox.currentIndex(),self.BGM[self.comboBox.currentIndex()])
         child.setWindowTitle("推荐结果")
         child.setWindowModality(Qt.ApplicationModal)
 
-        child.exec_()
 
+
+        child.exec_()

@@ -13,7 +13,7 @@ from PyQt5.QtGui import QPixmap
 
 
 class Ui_Dialog(object):
-    def setupUi(self, Dialog,index):
+    def setupUi(self, Dialog, index, BGMs):
         Dialog.setObjectName("Dialog")
         Dialog.resize(1117, 759)
         self.label = QtWidgets.QLabel(Dialog)
@@ -44,16 +44,18 @@ class Ui_Dialog(object):
         self.pushButton_2.setGeometry(QtCore.QRect(960, 580, 93, 28))
         self.pushButton_2.setObjectName("pushButton_2")
 
-        self.retranslateUi(Dialog,index)
+        self.retranslateUi(Dialog, index, BGMs)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
-    def retranslateUi(self, Dialog,index):
+    def retranslateUi(self, Dialog, index, BGMs):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        png = QPixmap("../fig" + str(index) + ".png")
+        png = QPixmap("./output_data/fig" + str(index) + ".png")
+        BGM_result_text = BGMs[0] + ' , ' + BGMs[1] + ' , ' + BGMs[2]
+
         self.label.setPixmap(png)
         self.label_2.setText(_translate("Dialog", "最热门BGM前三类"))
-        self.label_3.setText(_translate("Dialog", "Result"))
+        self.label_3.setText(_translate("Dialog", BGM_result_text))
         self.label_4.setText(_translate("Dialog", "推荐音乐示例"))
         self.label_5.setText(_translate("Dialog", "Result2"))
         self.pushButton.setText(_translate("Dialog", "播放"))
