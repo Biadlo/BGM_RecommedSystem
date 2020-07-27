@@ -43,6 +43,9 @@ class Ui_Dialog(object):
         self.pushButton_2 = QtWidgets.QPushButton(Dialog)
         self.pushButton_2.setGeometry(QtCore.QRect(960, 580, 93, 28))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.label_6 = QtWidgets.QLabel(Dialog)
+        self.label_6.setGeometry(QtCore.QRect(270, 60, 241, 31))
+        self.label_6.setObjectName("label_6")
 
         self.retranslateUi(Dialog, index, BGMs)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
@@ -60,3 +63,4 @@ class Ui_Dialog(object):
         self.label_5.setText(_translate("Dialog", "Result2"))
         self.pushButton.setText(_translate("Dialog", "播放"))
         self.pushButton_2.setText(_translate("Dialog", "停止"))
+        self.label_6.setText(_translate("Dialog", "热门带货视频音频聚类图"))

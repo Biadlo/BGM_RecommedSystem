@@ -16,7 +16,7 @@ from gui.dialog_ui import Ui_Dialog
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow,BGMs):
+    def setupUi(self, MainWindow, BGMs):
         MainWindow.setObjectName("抖音BGM推荐系统")
         MainWindow.resize(444, 406)
         self.BGM = BGMs
@@ -83,10 +83,8 @@ class Ui_MainWindow(object):
         # 窗口初始属性
         child = QDialog()
         child_ui = Ui_Dialog()
-        child_ui.setupUi(child, self.comboBox.currentIndex(),self.BGM[self.comboBox.currentIndex()])
+        child_ui.setupUi(child, self.comboBox.currentIndex(), self.BGM[self.comboBox.currentIndex()])
         child.setWindowTitle("推荐结果")
         child.setWindowModality(Qt.ApplicationModal)
-
-
 
         child.exec_()

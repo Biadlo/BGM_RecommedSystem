@@ -8,7 +8,7 @@ from sklearn.decomposition import PCA
 
 
 class DataHandler(object):
-    def __init__(self,datafile):
+    def __init__(self, datafile):
         # 获取元数据,每次一类
         self.metaData = []
         for i in range(9):
@@ -38,7 +38,8 @@ class DataHandler(object):
                 axes3d.scatter3D(self.data_reduction[i][self.pre == j, 0], self.data_reduction[i][self.pre == j, 1],
                                  self.data_reduction[i][self.pre == j, 2],
                                  marker='o', s=8, c=color[j], zorder=1, alpha=0.6)
-                axes3d.scatter3D(self.centroid_show[:, 0], self.centroid_show[:, 1], self.centroid_show[:, 2], marker='x', s=200,
+                axes3d.scatter3D(self.centroid_show[:, 0], self.centroid_show[:, 1], self.centroid_show[:, 2],
+                                 marker='x', s=200,
                                  c='black',
                                  zorder=2, alpha=1)
 
@@ -56,5 +57,3 @@ class DataHandler(object):
         for j in range(3):
             music_class.append(music_types[int(np.argmax(centroid[j]))])
         return music_class
-
-

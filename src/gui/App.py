@@ -8,7 +8,7 @@ from gui.main_ui import Ui_MainWindow
 if __name__ == '__main__':
     # 算法层启动
     dataHandler = DataHandler('./input_data/origin_data.txt')
-    BGM = [] # 记录每一类推荐的BGM类型
+    BGM = []  # 记录每一类推荐的BGM类型
     for i in range(9):
         BGM.append(dataHandler.getMusicType(i))
 
@@ -16,6 +16,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     mainWindow = QMainWindow()
     mainWindow_ui = Ui_MainWindow()
-    mainWindow_ui.setupUi(mainWindow,BGM)
+    mainWindow_ui.setupUi(mainWindow, BGM)
     mainWindow.show()
     sys.exit(app.exec_())
