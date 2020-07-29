@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 
 from algorithm.DataLoader import DataLoader
-import numpy as np
 
 dataLoader = DataLoader("../gui/input_data/origin_data.txt")
 data = dataLoader.metadata

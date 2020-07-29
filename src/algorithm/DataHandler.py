@@ -1,11 +1,12 @@
+import numpy as np
+from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sklearn import svm
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.model_selection import GridSearchCV
 
 from algorithm.DataLoader import DataLoader
-import numpy as np
-from sklearn.cluster import KMeans
-from matplotlib import pyplot as plt
-from sklearn.decomposition import PCA
 
 
 class DataHandler(object):
@@ -59,15 +60,27 @@ class DataHandler(object):
             music_class.append(music_types[int(np.argmax(centroid[j]))])
         return music_class
 
-    def getPrediction(self,index,s):
+    def getPrediction(self, index, s):
         target = []
         target.append(s.split(','))
         target[0] = [float(x) for x in target[0]]
         # 支持向量分类SVR
         svr = svm.SVR(kernel='rbf')
         X = self.data_loader.getMetaData()[index * 1500:(index + 1) * 1500, 2:12]
-        y =  self.data_loader.getMetaData()[index * 1500:(index + 1) * 1500, 1]
+        y = self.data_loader.getMetaData()[index * 1500:(index + 1) * 1500, 1]
         svr.fit(X, y)
         y_pre = svr.predict(target)
         print(y_pre)
         return y_pre
+
+    def selectParameter(self):
+        X = self.data_loader.getMetaData()[:, 2:12]
+        y = self.data_loader.getMetaData()[:, 1]
+
+        # 网格搜索
+        parameters = {'kernel': ('linear', 'rbf'), 'C': [0.1, 1, 2, 4, 8], 'gamma': [0.125, 0.25, 0.5, 1, 2, 4, 8]}
+        svr = svm.SVR()
+        clf = GridSearchCV(svr, parameters, n_jobs=-1)
+        clf.fit(X, y)
+        print('The parameters of the best model are: ')
+        print(clf.best_params_)

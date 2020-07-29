@@ -1,8 +1,8 @@
 # 数据加载模块，包含数据预处理函数
 import numpy as np
 import pandas as pd
-from sklearn.impute import SimpleImputer
 from sklearn.feature_selection import VarianceThreshold
+from sklearn.impute import SimpleImputer
 
 
 class DataLoader(object):
