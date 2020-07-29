@@ -1,4 +1,5 @@
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn import svm
 
 from algorithm.DataLoader import DataLoader
 import numpy as np
@@ -15,9 +16,9 @@ class DataHandler(object):
             self.data_loader = DataLoader(datafile)
             self.metaData.append(self.data_loader.getMetaData()[i * 1500:(i + 1) * 1500, 2:12])
 
+    def dataVisual(self):
         # pca 主成分分析,0.95保存率下需要8维,降维为3维用于数据展示
         self.pca = PCA(n_components=3)
-
         # 降维结果集
         self.data_reduction = []
         for i in range(9):
@@ -44,7 +45,7 @@ class DataHandler(object):
                                  zorder=2, alpha=1)
 
             # 保存为多个文件
-            plt.savefig('./output_data/fig' + str(i) + '.png', bbox_inches='tight')
+            plt.savefig('./gui/output_data/fig' + str(i) + '.png', bbox_inches='tight')
 
     def getMusicType(self, index):
         # 根据质心确定音乐种类，重新使用聚类，不做数据可视化
@@ -57,3 +58,16 @@ class DataHandler(object):
         for j in range(3):
             music_class.append(music_types[int(np.argmax(centroid[j]))])
         return music_class
+
+    def getPrediction(self,index,s):
+        target = []
+        target.append(s.split(','))
+        target[0] = [float(x) for x in target[0]]
+        # 支持向量分类SVR
+        svr = svm.SVR(kernel='rbf')
+        X = self.data_loader.getMetaData()[index * 1500:(index + 1) * 1500, 2:12]
+        y =  self.data_loader.getMetaData()[index * 1500:(index + 1) * 1500, 1]
+        svr.fit(X, y)
+        y_pre = svr.predict(target)
+        print(y_pre)
+        return y_pre
